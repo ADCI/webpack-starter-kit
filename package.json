@@ -1,0 +1,16 @@
+{
+  "name": "webpack-starter-kit",
+  "version": "0.1.0",
+  "description": "Webpack boilerplate config",
+  "main": "dist/bundle.js",
+  "dependencies": {
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "NODE_ENV=development webpack",
+    "prod": "NODE_ENV=production webpack",
+    "serve": "node_modules/.bin/webpack-dev-server"
+  }
+}
