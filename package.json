@@ -2,26 +2,91 @@
   "name": "webpack-starter-kit",
   "version": "0.1.0",
   "description": "Webpack boilerplate config",
-  "main": "dist/bundle.js",
+  "main": "dist/main.js",
   "dependencies": {
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
-    "babel-runtime": "^6.22.0",
-    "bundle-loader": "^0.5.4",
-    "exports-loader": "^0.6.3",
-    "imports-loader": "^0.7.0",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+
   },
   "devDependencies": {
+    "autoprefixer": "^6.7.2",
+    "css-mqpacker": "^5.0.1",
+    "cssnano": "^3.10.0",
+    "postcss-calc": "^5.3.1",
+    "postcss-flexbugs-fixes": "^2.1.0",
+    "postcss-reporter": "^3.0.0",
+    "postcss-scss": "^0.4.0",
+    "postcss-strip-inline-comments": "^0.1.5",
+    "precss": "^1.4.0",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-es2016": "^6.22.0",
-    "postcss-loader": "^1.2.2"
+    "babel-runtime": "^6.22.0",
+    "bundle-loader": "^0.5.4",
+    "exports-loader": "^0.6.3",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "imports-loader": "^0.7.0",
+    "node-sass": "^4.5.0",
+    "postcss-loader": "^1.2.2",
+    "sass-loader": "^4.1.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
     "start": "NODE_ENV=development webpack",
+    "build": "NODE_ENV=build webpack",
     "prod": "NODE_ENV=production webpack",
-    "serve": "node_modules/.bin/webpack-dev-server"
+    "serve": "node_modules/.bin/webpack-dev-server",
+    "debug": "webpack -d"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "at-rule-no-vendor-prefix": true,
+      "media-feature-name-no-vendor-prefix": true,
+      "property-no-vendor-prefix": true,
+      "selector-no-vendor-prefix": true,
+      "value-no-vendor-prefix": true,
+      "max-nesting-depth": [3, {
+        "ignore": ["blockless-at-rules"]
+      }],
+      "selector-max-compound-selectors": 3,
+      "selector-max-specificity": "0, 3, 0",
+      "at-rule-no-unknown": true,
+      "declaration-no-important": true,
+      "declaration-property-unit-blacklist": {
+        "font-size": ["em"]
+      },
+      "selector-no-attribute": true,
+      "selector-no-combinator": true,
+      "selector-no-id": true,
+      "selector-no-qualifying-type": true,
+      "selector-no-type": true,
+      "selector-no-universal": true,
+      "max-line-length": 75
+    },
+    "ignoreFiles": [
+      "src/postcss/vendor",
+      "node_modules"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "es2016"
+    ],
+    "retainLines": true,
+    "ignore": [
+      "src/js/vendor",
+      "/node_modules/"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended"
+    ]
+  },
+  "engines": {
+    "node": ">=4.2.6"
   }
 }
