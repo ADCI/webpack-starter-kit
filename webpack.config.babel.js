@@ -3,7 +3,6 @@ import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import precss from 'precss';
-import postscss from 'postcss-scss';
 import postcssCalc from 'postcss-calc';
 import stripInlineComments from 'postcss-strip-inline-comments';
 import cssMqpacker from 'css-mqpacker';
@@ -12,7 +11,7 @@ import postcssReporter from 'postcss-reporter';
 import cssnano from 'cssnano';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
-const extractPostcss = new ExtractTextPlugin({filename: '[name].css', disable: false, allChunks: true});
+const extractPostcss = new ExtractTextPlugin({filename: './../css/[name].css', disable: false, allChunks: true});
 const supportedBrowsers = [
   '> 0.5%',
   'last 2 versions',
@@ -78,7 +77,8 @@ module.exports = () => {
       main: './js/main.js'
     },
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'dist/js'),
+      publicPath: '',
       filename: '[name].js'
     },
 
@@ -89,17 +89,6 @@ module.exports = () => {
     devServer: {
       contentBase: "./"
     },
-
-    plugins: [
-      new webpack.DefinePlugin({
-        NODE_ENV: JSON.stringify(NODE_ENV),
-        LANG: JSON.stringify("en")
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: "common"
-      }),
-      extractPostcss
-    ],
 
     module: {
       rules: [
@@ -116,7 +105,7 @@ module.exports = () => {
         {
           test: /\.css$/,
           use: extractPostcss.extract({
-            fallback: "style-loader",
+            fallback: 'style-loader',
             use: [
               {
                 loader: 'css-loader',
@@ -130,7 +119,7 @@ module.exports = () => {
                 options: {
                   sourceMap: true,
                   plugins: () => postcssProcessors,
-                  syntax: postscss
+                  syntax: 'postcss-scss'
                 }
               }
             ]
@@ -155,7 +144,18 @@ module.exports = () => {
           loader: 'url?name=[path][name].[ext]&limit=4096'
         }
       ]
-    }
+    },
+
+    plugins: [
+      new webpack.DefinePlugin({
+        NODE_ENV: JSON.stringify(NODE_ENV),
+        LANG: JSON.stringify("en")
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: "common"
+      }),
+      extractPostcss
+    ]
   }
 };
 
