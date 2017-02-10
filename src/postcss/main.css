@@ -3,6 +3,7 @@
 @import "./base/tools";
 
 /* Vendors */
+@import "normalize.css";
 
 /* Base styles */
 @import "./base/elements";

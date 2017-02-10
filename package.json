@@ -5,6 +5,7 @@
   "main": "dist/main.js",
   "dependencies": {
     "css-loader": "^0.26.1",
+    "normalize.css": "^5.0.0",
     "style-loader": "^0.13.1"
   },
   "devDependencies": {
