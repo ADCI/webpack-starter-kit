@@ -1,12 +1,40 @@
 import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
-import precss from 'precss';
+import postcssImport from 'postcss-import';
+import postcssMixins from 'postcss-mixins';
+import postcssVariables from 'postcss-advanced-variables';
+import postcssCustomSelectors from 'postcss-custom-selectors';
+import postcssCustomMedia from 'postcss-custom-media';
+import postcssCustomProperties from 'postcss-custom-properties';
+import postcssMediaMinMax from 'postcss-media-minmax';
+import postcssColorFunction from 'postcss-color-function';
+import postcssNesting from 'postcss-nesting';
+import postcssNested from 'postcss-nested';
+import postcssAtRoot from 'postcss-atroot';
+import postcssPropertyLookup from 'postcss-property-lookup';
+import postcssExtend from 'postcss-extend';
+import postcssSelectorMatches from 'postcss-selector-matches';
+import postcssSelectorNot from 'postcss-selector-not';
 import postcssCalc from 'postcss-calc';
-import stripInlineComments from 'postcss-strip-inline-comments';
 import cssMqpacker from 'css-mqpacker';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
+import postcssClearfix from 'postcss-clearfix';
+import postcssColorGray from 'postcss-color-gray';
+import postcssColorHexAlpha from 'postcss-color-hex-alpha';
+import postcssColorHwb from 'postcss-color-hwb';
+import postcssColorRebeccapurple from 'postcss-color-rebeccapurple';
+import postcssEasings from 'postcss-easings';
+import postcssFontVariant from 'postcss-font-variant';
+import postcssHexrgba from 'postcss-hexrgba';
+import postcssInitial from 'postcss-initial';
+import postcssInputStyle from 'postcss-input-style';
+import postcssPosition from 'postcss-position';
+import postcssPseudoClassAnyLink from 'postcss-pseudo-class-any-link';
+import postcssPseudoelements from 'postcss-pseudoelements';
+import postcssQuantityQueries from 'postcss-quantity-queries';
 import postcssReporter from 'postcss-reporter';
 import cssnano from 'cssnano';
 
@@ -26,9 +54,36 @@ const supportedBrowsers = [
   'bb >= 10'
 ];
 const postcssProcessors = [
-  precss,
-  stripInlineComments,
+  postcssImport,
+  postcssMixins,
+  postcssVariables,
+  postcssCustomSelectors,
+  postcssCustomMedia,
+  postcssCustomProperties,
+  postcssMediaMinMax,
+  postcssColorFunction,
+  postcssColorGray,
+  postcssColorHexAlpha,
+  postcssColorHwb,
+  postcssColorRebeccapurple,
+  postcssEasings,
+  postcssFontVariant,
+  postcssHexrgba,
+  postcssPseudoClassAnyLink,
+  postcssInputStyle,
+  postcssPosition,
+  postcssNesting,
+  postcssNested,
+  postcssAtRoot,
+  postcssPropertyLookup,
+  postcssExtend,
+  postcssSelectorMatches,
+  postcssSelectorNot,
+  postcssClearfix,
+  postcssQuantityQueries,
+  postcssPseudoelements,
   postcssCalc,
+  postcssInitial,
   postcssFlexbugsFixes,
   autoprefixer({
     browsers: supportedBrowsers,
@@ -37,11 +92,11 @@ const postcssProcessors = [
   cssMqpacker({ sort: true }),
   cssnano({
     autoprefixer: false,
-    calc: true,
-    colormin: true,
+    calc: false,
+    colormin: false,
     convertValues: true,
     core: true,
-    discardComments: false,
+    discardComments: true,
     discardDuplicates: true,
     discardEmpty: true,
     discardOverridden: true,
@@ -66,7 +121,8 @@ const postcssProcessors = [
     reduceTransforms: true,
     uniqueSelectors: true,
     zindex: false
-  })
+  }),
+  postcssReporter({ clearReportedMessages: true })
 ];
 
 module.exports = () => {
@@ -78,7 +134,7 @@ module.exports = () => {
     },
     output: {
       path: path.resolve(__dirname, 'dist/js'),
-      publicPath: '',
+      publicPath: '/dist/',
       filename: '[name].js'
     },
 
@@ -127,7 +183,17 @@ module.exports = () => {
         },
         {
           test: /\.pug$/,
-          loader: 'pug-loader'
+          use: [
+            {
+              loader: 'html-loader',
+            },
+            {
+              loader: 'pug-html-loader',
+              options: {
+                exports: false
+              }
+            }
+          ]
         },
         {
           test: /\.twig$/,
@@ -153,6 +219,9 @@ module.exports = () => {
       }),
       new webpack.optimize.CommonsChunkPlugin({
         name: "common"
+      }),
+      new HtmlWebpackPlugin({
+        template: 'pug/index.pug'
       }),
       extractPostcss
     ]
