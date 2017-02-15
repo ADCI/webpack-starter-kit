@@ -4,9 +4,7 @@
   "description": "Webpack boilerplate config",
   "main": "dist/main.js",
   "dependencies": {
-    "css-loader": "^0.26.1",
-    "normalize.css": "^5.0.0",
-    "style-loader": "^0.13.1"
+    "normalize.css": "^5.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -17,85 +15,77 @@
     "babel-preset-es2016": "^6.22.0",
     "babel-runtime": "^6.22.0",
     "bundle-loader": "^0.5.4",
+    "css-loader": "^0.26.1",
     "css-mqpacker": "^5.0.1",
     "cssnano": "^3.10.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.28.0",
     "imports-loader": "^0.7.0",
     "node-sass": "^4.5.0",
+    "onchange": "^3.2.1",
+    "parallelshell": "^2.0.0",
+    "postcss-advanced-variables": "^1.2.2",
+    "postcss-atroot": "^0.1.3",
     "postcss-calc": "^5.3.1",
+    "postcss-clearfix": "^1.0.0",
+    "postcss-color-function": "^3.0.0",
+    "postcss-color-gray": "^3.0.1",
+    "postcss-color-hex-alpha": "^2.0.0",
+    "postcss-color-hwb": "^2.0.1",
+    "postcss-color-rebeccapurple": "^2.0.1",
+    "postcss-custom-media": "^5.0.1",
+    "postcss-custom-properties": "^5.0.2",
+    "postcss-custom-selectors": "^3.0.0",
+    "postcss-easings": "^0.3.0",
+    "postcss-extend": "^1.0.5",
     "postcss-flexbugs-fixes": "^2.1.0",
+    "postcss-font-variant": "^2.0.1",
+    "postcss-hexrgba": "^0.2.1",
+    "postcss-import": "^9.1.0",
+    "postcss-initial": "^1.5.3",
+    "postcss-input-style": "^0.3.0",
     "postcss-loader": "^1.2.2",
+    "postcss-media-minmax": "^2.1.2",
+    "postcss-mixins": "^5.4.1",
+    "postcss-nested": "^1.0.0",
+    "postcss-nesting": "^2.3.1",
+    "postcss-position": "^0.5.0",
+    "postcss-property-lookup": "^1.2.1",
+    "postcss-pseudo-class-any-link": "^3.0.1",
+    "postcss-pseudoelements": "^3.0.0",
+    "postcss-quantity-queries": "^0.4.0",
     "postcss-reporter": "^3.0.0",
     "postcss-scss": "^0.4.0",
-    "postcss-strip-inline-comments": "^0.1.5",
-    "precss": "^1.4.0",
-    "sass-loader": "^5.0.0",
+    "postcss-selector-matches": "^2.0.5",
+    "postcss-selector-not": "^2.0.0",
+    "pug-html-loader": "^1.1.0",
+    "sass-loader": "^6.0.0",
+    "style-loader": "^0.13.1",
+    "stylelint": "^7.8.0",
+    "stylelint-config-standard": "^16.0.0",
+    "stylelint-csslint-missing": "^0.0.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
     "start": "NODE_ENV=development webpack",
-    "build": "NODE_ENV=build webpack",
+    "build": "NODE_ENV=development webpack",
     "prod": "NODE_ENV=production webpack",
     "serve": "node_modules/.bin/webpack-dev-server",
-    "debug": "webpack -d"
-  },
-  "stylelint": {
-    "extends": "stylelint-config-standard",
-    "rules": {
-      "at-rule-no-vendor-prefix": true,
-      "media-feature-name-no-vendor-prefix": true,
-      "property-no-vendor-prefix": true,
-      "selector-no-vendor-prefix": true,
-      "value-no-vendor-prefix": true,
-      "max-nesting-depth": [
-        3,
-        {
-          "ignore": [
-            "blockless-at-rules"
-          ]
-        }
-      ],
-      "selector-max-compound-selectors": 3,
-      "selector-max-specificity": "0, 3, 0",
-      "at-rule-no-unknown": true,
-      "declaration-no-important": true,
-      "declaration-property-unit-blacklist": {
-        "font-size": [
-          "em"
-        ]
-      },
-      "selector-no-attribute": true,
-      "selector-no-combinator": true,
-      "selector-no-id": true,
-      "selector-no-qualifying-type": true,
-      "selector-no-type": true,
-      "selector-no-universal": true,
-      "max-line-length": 75
-    },
-    "ignoreFiles": [
-      "src/postcss/vendor",
-      "node_modules"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "es2016"
-    ],
-    "retainLines": true,
-    "ignore": [
-      "src/js/vendor",
-      "/node_modules/"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended"
-    ]
+    "debug": "webpack -d",
+    "lint:css": "stylelint src/postcss/**/*.css",
+    "lint:js": "eslint src/js",
+    "lint": "npm run lint:css && npm run lint:js"
   },
   "engines": {
     "node": ">=4.2.6"
-  }
+  },
+  "private": true
 }
