@@ -14,3 +14,6 @@
 @import "./objects/buttons";
 
 /* Components */
+@import "./components/header";
+@import "./components/footer";
+@import "./components/nav";

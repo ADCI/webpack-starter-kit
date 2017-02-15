@@ -1,13 +1,13 @@
-// Colors
+/* Colors */
 $white: #fff;
 $black: #000;
 
-// Fonts
+/* Fonts */
 $open-sans: "Open Sans", sans-serif;
 $montserrat: "Montserrat", sans-serif;
 $fredoka-one: "Fredoka One", cursive;
 
-// Base
+/* Base */
 $main-font: $open-sans;
 $main-font-size: 14px;
 $main-line-height: 2;
@@ -23,20 +23,20 @@ $container-gutter: 45px;
 $container-width: calc(1700px + $container-gutter * 2);
 $col-gutter: $container-gutter;
 
-// Header
+/* Header */
 $header-text-color: $black;
 
-// Buttons
+/* Buttons */
 $action-button-color: $header-text-color;
 
-// Logo
+/* Logo */
 $logo-color: $header-text-color;
 
-// Nav
+/* Nav */
 $nav-text-color: $header-text-color;
 $nav-link-underline-color: color($header-text-color a(20%));
 
-// Media variables
+/* Media variables */
 @custom-media --3xl screen and (min-width: 1921px);
 @custom-media --to-xxl screen and (max-width: 1920px);
 @custom-media --from-xxl screen and (min-width: 1280px);

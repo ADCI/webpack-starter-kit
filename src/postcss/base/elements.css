@@ -1,11 +1,14 @@
 /* ==========================================================================
    Base styles
    ========================================================================== */
+
+/* stylelint-disable selector-no-universal  */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+/* stylelint-enable selector-no-universal */
 
 html {
   font-family: $main-font;

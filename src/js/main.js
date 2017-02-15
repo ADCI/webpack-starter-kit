@@ -5,3 +5,4 @@
 // Code
 
 import './../postcss/main.css';
+import './../pug/index.pug';

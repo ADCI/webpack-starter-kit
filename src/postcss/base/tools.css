@@ -1,4 +1,4 @@
-// Mixins
+/* Mixins */
 
 @define-mixin list-reset {
   margin: 0;
