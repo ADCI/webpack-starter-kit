@@ -1,8 +1,14 @@
+$container-gutter: 45px;
+$container-width: calc(1700px + $container-gutter * 2);
+$col-gutter: $container-gutter;
+
 .clearfix {
-  clear: fix;
+  @mixin clearfix;
 }
 
 .container {
+  @mixin clearfix;
+
   display: block;
   width: auto;
   max-width: $container-width;
@@ -10,7 +16,6 @@
   padding-right: $container-gutter;
   margin-left: auto;
   margin-right: auto;
-  clear: fix;
 }
 
 .row {

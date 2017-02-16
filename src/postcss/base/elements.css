@@ -1,7 +1,6 @@
 /* ==========================================================================
    Base styles
    ========================================================================== */
-
 /* stylelint-disable selector-no-universal  */
 *,
 *::before,
@@ -35,12 +34,6 @@ textarea {
 
 img {
   height: auto;
-}
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
 }
 
 textarea {

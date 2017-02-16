@@ -39,7 +39,7 @@ import postcssReporter from 'postcss-reporter';
 import cssnano from 'cssnano';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
-const extractPostcss = new ExtractTextPlugin({filename: './../css/[name].css', disable: false, allChunks: true});
+const extractPostcss = new ExtractTextPlugin({filename: './css/[name].css', disable: false, allChunks: true});
 const supportedBrowsers = [
   '> 0.5%',
   'last 2 versions',
@@ -133,9 +133,9 @@ module.exports = () => {
       main: './js/main.js'
     },
     output: {
-      path: path.resolve(__dirname, 'dist/js'),
-      publicPath: '/dist/',
-      filename: '[name].js'
+      path: path.resolve(__dirname, 'dist'),
+      publicPath: '',
+      filename: './js/[name].js'
     },
 
     watch: NODE_ENV === 'development',
@@ -221,7 +221,7 @@ module.exports = () => {
         name: "common"
       }),
       new HtmlWebpackPlugin({
-        template: 'pug/index.pug'
+        template: 'pug/main.pug'
       }),
       extractPostcss
     ]

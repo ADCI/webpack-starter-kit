@@ -1,14 +1,12 @@
 /* Colors */
-$white: #fff;
-$black: #000;
+$c-white: #fff;
+$c-black: #000;
 
 /* Fonts */
-$open-sans: "Open Sans", sans-serif;
-$montserrat: "Montserrat", sans-serif;
-$fredoka-one: "Fredoka One", cursive;
+$f-sans-serif: sans-serif;
 
-/* Base */
-$main-font: $open-sans;
+/* Base variables */
+$main-font: $sans-serif;
 $main-font-size: 14px;
 $main-line-height: 2;
 $heading-font: $montserrat;
@@ -17,24 +15,7 @@ $main-bg: transparent;
 $main-text-color: $shuttle-gray;
 $secondary-text-color: $white;
 $link-color: inherit;
-$transition-time: 0.3s;
-
-$container-gutter: 45px;
-$container-width: calc(1700px + $container-gutter * 2);
-$col-gutter: $container-gutter;
-
-/* Header */
-$header-text-color: $black;
-
-/* Buttons */
-$action-button-color: $header-text-color;
-
-/* Logo */
-$logo-color: $header-text-color;
-
-/* Nav */
-$nav-text-color: $header-text-color;
-$nav-link-underline-color: color($header-text-color a(20%));
+$default-transition-time: 0.3s;
 
 /* Media variables */
 @custom-media --3xl screen and (min-width: 1921px);
@@ -61,5 +42,5 @@ $nav-link-underline-color: color($header-text-color a(20%));
 @custom-media --from-s screen and (min-width: 321px);
 @custom-media --s screen and (width >= 321px) and (width <= 479px);
 @custom-media --xs screen and (max-width: 320px);
-@custom-media --retina screen and (min-resolution: 120dpi), screen and (min-resolution: 1.25dppx);
-@custom-media --retina2x screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx);
+
+@custom-media --retina2x screen and (min-resolution: 120dpi), screen and (min-resolution: 1.25dppx);

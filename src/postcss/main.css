@@ -1,6 +1,6 @@
-// SET UP
+/* Setup */
 @import "./base/vars";
-@import "./base/tools";
+@import "./base/mixins";
 
 /* Vendors */
 @import "normalize.css";
