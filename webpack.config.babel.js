@@ -200,12 +200,33 @@ module.exports = () => {
           loader: 'twig-loader'
         },
         {
-          test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+          test: /.*\.(gif|png|jpe?g|svg)$/i,
+          loaders: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              query: {
+                progressive: true,
+                optimizationLevel: 7,
+                interlaced: true,
+                pngquant: {
+                  quality: '75-90',
+                  speed: 4
+                },
+                mozjpeg: {
+                  quality: 75
+                }
+              }
+            }
+          ]
+        },
+        {
+          test: /\.(ttf|eot|woff|woff2)$/,
           include: /\/node_modules\//,
           loader: 'file-loader?name=[1].[ext]&regExp=node_modules/(.*)'
         },
         {
-          test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+          test: /\.(ttf|eot|woff|woff2)$/,
           exclude: /\/node_modules\//,
           loader: 'url-loader?name=[path][name].[ext]&limit=4096'
         }
