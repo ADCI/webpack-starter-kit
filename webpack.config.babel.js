@@ -202,12 +202,12 @@ module.exports = () => {
         {
           test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
           include: /\/node_modules\//,
-          loader: 'file?name=[1].[ext]&regExp=node_modules/(.*)'
+          loader: 'file-loader?name=[1].[ext]&regExp=node_modules/(.*)'
         },
         {
           test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
           exclude: /\/node_modules\//,
-          loader: 'url?name=[path][name].[ext]&limit=4096'
+          loader: 'url-loader?name=[path][name].[ext]&limit=4096'
         }
       ]
     },
