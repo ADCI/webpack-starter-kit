@@ -36,10 +36,9 @@ import postcssPseudoClassAnyLink from 'postcss-pseudo-class-any-link';
 import postcssPseudoelements from 'postcss-pseudoelements';
 import postcssQuantityQueries from 'postcss-quantity-queries';
 import postcssReporter from 'postcss-reporter';
-import cssnano from 'cssnano';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
-const extractPostcss = new ExtractTextPlugin({filename: './css/[name].css', disable: false, allChunks: true});
+const extractStyles = new ExtractTextPlugin('./css/[name].css');
 const supportedBrowsers = [
   '> 0.5%',
   'last 2 versions',
@@ -90,39 +89,7 @@ const postcssProcessors = [
     cascade: false
   }),
   cssMqpacker({ sort: true }),
-  cssnano({
-    autoprefixer: false,
-    calc: false,
-    colormin: false,
-    convertValues: true,
-    core: true,
-    discardComments: true,
-    discardDuplicates: true,
-    discardEmpty: true,
-    discardOverridden: true,
-    discardUnused: true,
-    filterOptimiser: true,
-    functionOptimiser: true,
-    mergeIdents: true,
-    mergeLonghand: true,
-    mergeRules: true,
-    minifyFontValues: true,
-    minifyGradients: true,
-    minifyParams: true,
-    minifySelectors: true,
-    normalizeCharset: true,
-    normalizeUrl: true,
-    orderedValues: true,
-    reduceBackgroundRepeat: true,
-    reduceIdents: true,
-    reduceInitial: true,
-    reducePositions: true,
-    reduceTimingFunctions: true,
-    reduceTransforms: true,
-    uniqueSelectors: true,
-    zindex: false
-  }),
-  postcssReporter({ clearReportedMessages: true })
+  postcssReporter({ clearMessages: true })
 ];
 
 module.exports = () => {
@@ -130,11 +97,11 @@ module.exports = () => {
     context: path.resolve(__dirname, 'src'),
 
     entry: {
-      main: './js/main.js'
+      main: './app.js'
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '',
+      publicPath: './',
       filename: './js/[name].js'
     },
 
@@ -160,20 +127,44 @@ module.exports = () => {
         },
         {
           test: /\.css$/,
-          use: extractPostcss.extract({
+          use: extractStyles.extract({
             fallback: 'style-loader',
             use: [
               {
                 loader: 'css-loader',
                 options: {
                   importLoaders: 1,
-                  sourceMap: true
+                  sourceMap: true,
                 }
               },
               {
                 loader: 'postcss-loader',
                 options: {
+                  sourceMap: 'inline',
+                  plugins: () => postcssProcessors,
+                  syntax: 'postcss-scss'
+                }
+              }
+            ]
+          })
+        },
+        {
+          test: /\.css$/,
+          include: path.resolve(__dirname, 'src/fonts'),
+          use: extractStyles.extract({
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1,
                   sourceMap: true,
+                  import: false
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: 'inline',
                   plugins: () => postcssProcessors,
                   syntax: 'postcss-scss'
                 }
@@ -184,9 +175,7 @@ module.exports = () => {
         {
           test: /\.pug$/,
           use: [
-            {
-              loader: 'html-loader',
-            },
+            'html-loader',
             {
               loader: 'pug-html-loader',
               options: {
@@ -196,40 +185,43 @@ module.exports = () => {
           ]
         },
         {
-          test: /\.twig$/,
-          loader: 'twig-loader'
-        },
-        {
           test: /.*\.(gif|png|jpe?g|svg)$/i,
-          loaders: [
-            'file-loader',
+          use: [
+            {
+              loader: 'file-loader',
+              query: {
+                name: './assets/[name].[ext]'
+              }
+            },
             {
               loader: 'image-webpack-loader',
               query: {
                 progressive: true,
-                optimizationLevel: 7,
-                interlaced: true,
                 pngquant: {
                   quality: '75-90',
                   speed: 4
                 },
                 mozjpeg: {
                   quality: 75
+                },
+                gifsicle: {
+                  interlaced: true
                 }
               }
             }
           ]
         },
         {
-          test: /\.(ttf|eot|woff|woff2)$/,
-          include: /\/node_modules\//,
-          loader: 'file-loader?name=[1].[ext]&regExp=node_modules/(.*)'
+          test: /\.(woff2?|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              query: {
+                name: './assets/[name].[ext]'
+              }
+            }
+          ]
         },
-        {
-          test: /\.(ttf|eot|woff|woff2)$/,
-          exclude: /\/node_modules\//,
-          loader: 'url-loader?name=[path][name].[ext]&limit=4096'
-        }
       ]
     },
 
@@ -244,7 +236,7 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: 'pug/main.pug'
       }),
-      extractPostcss
+      extractStyles
     ]
   }
 };

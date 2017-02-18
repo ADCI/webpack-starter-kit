@@ -13,6 +13,7 @@
     "babel-preset-es2016": "^6.22.0",
     "babel-runtime": "^6.22.0",
     "bundle-loader": "^0.5.4",
+    "copyfiles": "^1.2.0",
     "css-loader": "^0.26.1",
     "css-mqpacker": "^5.0.1",
     "cssnano": "^3.10.0",
@@ -77,14 +78,12 @@
     "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
+    "fonts": "copyfiles -f 'src/fonts/**/*.{otf,ttf,woff,woff2}' 'dist/assets/'",
     "start": "NODE_ENV=development webpack",
     "build": "NODE_ENV=development webpack",
     "prod": "NODE_ENV=production webpack",
     "serve": "node_modules/.bin/webpack-dev-server",
-    "debug": "webpack -d",
-    "lint:css": "stylelint src/postcss/**/*.css",
-    "lint:js": "eslint src/js",
-    "lint": "npm run lint:css && npm run lint:js"
+    "debug": "webpack -d"
   },
   "engines": {
     "node": ">=4.2.6"
