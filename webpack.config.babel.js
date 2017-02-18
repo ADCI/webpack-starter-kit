@@ -149,30 +149,6 @@ module.exports = () => {
           })
         },
         {
-          test: /\.css$/,
-          include: path.resolve(__dirname, 'src/fonts'),
-          use: extractStyles.extract({
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                  sourceMap: true,
-                  import: false
-                }
-              },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: 'inline',
-                  plugins: () => postcssProcessors,
-                  syntax: 'postcss-scss'
-                }
-              }
-            ]
-          })
-        },
-        {
           test: /\.pug$/,
           use: [
             'html-loader',
