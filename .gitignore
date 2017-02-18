@@ -230,5 +230,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-
-dist
+# Ignore yarn lock file
+yarn.lock
