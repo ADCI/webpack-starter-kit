@@ -36,8 +36,8 @@ import postcssPseudoClassAnyLink from 'postcss-pseudo-class-any-link';
 import postcssPseudoelements from 'postcss-pseudoelements';
 import postcssQuantityQueries from 'postcss-quantity-queries';
 import postcssReporter from 'postcss-reporter';
+import StyleLintPlugin from 'stylelint-webpack-plugin';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
 const extractStyles = new ExtractTextPlugin('./css/[name].css');
 const supportedBrowsers = [
   '> 0.5%',
@@ -92,49 +92,87 @@ const postcssProcessors = [
   postcssReporter({ clearMessages: true })
 ];
 
-module.exports = () => {
+module.exports = env => {
   return {
+
     context: path.resolve(__dirname, 'src'),
 
     entry: {
       main: './app.js'
     },
+
     output: {
       path: path.resolve(__dirname, 'dist'),
-      publicPath: './',
       filename: './js/[name].js'
     },
 
-    watch: NODE_ENV === 'development',
+    watch: env.dev,
 
-    devtool: NODE_ENV == 'development' ? 'cheap-module-eval-source-map' : null,
+    devtool: env.dev ? 'cheap-module-eval-source-map' : null,
 
     devServer: {
-      contentBase: "./"
+      contentBase: path.join(__dirname, "dist"),
+      watchContentBase: true
     },
 
     module: {
       rules: [
         {
           test: /\.js$/,
-          include: __dirname + '/src/js',
-          loader: 'babel-loader',
-          query: {
-            presets: ['es2015', 'es2016'],
-            cacheDirectory: true,
-            plugins: ['transform-runtime']
-          }
+          include: path.resolve(__dirname, 'src/js'),
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['es2015', 'es2016'],
+                cacheDirectory: true,
+                plugins: ['transform-runtime']
+              }
+            },
+            {
+              loader: 'eslint-loader',
+              options: {
+                cache: true,
+                emitWarning: true,
+                configFile: '.eslintrc'
+              }
+            }
+          ]
         },
         {
           test: /\.css$/,
+          exclude: path.resolve(__dirname, 'src/fonts'),
           use: extractStyles.extract({
-            fallback: 'style-loader',
             use: [
               {
                 loader: 'css-loader',
                 options: {
                   importLoaders: 1,
                   sourceMap: true,
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: 'inline',
+                  plugins: () => postcssProcessors,
+                  syntax: 'postcss-scss'
+                }
+              }
+            ]
+          })
+        },
+        {
+          test: /\.css$/,
+          include: path.resolve(__dirname, 'src/fonts'),
+          use: extractStyles.extract({
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true,
+                  import: false,
+                  url: false
                 }
               },
               {
@@ -203,7 +241,6 @@ module.exports = () => {
 
     plugins: [
       new webpack.DefinePlugin({
-        NODE_ENV: JSON.stringify(NODE_ENV),
         LANG: JSON.stringify("en")
       }),
       new webpack.optimize.CommonsChunkPlugin({
@@ -212,13 +249,14 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: 'pug/main.pug'
       }),
-      extractStyles
+      extractStyles,
+      new StyleLintPlugin({
+        configFile: '.stylelintrc',
+        context: 'src/postcss',
+        files: '**/*.css',
+        failOnError: false,
+        quiet: true,
+      }),
     ]
   }
 };
-
-if (NODE_ENV == 'production') {
-  module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin()
-  );
-}
