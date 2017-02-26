@@ -1,0 +1,10 @@
+nav.nav
+  ul.nav__menu
+    - var navItems = ['Link 1', 'Link 2'];
+    each navItem, index in navItems
+      if index == 0
+        li.nav__item.nav__item--active
+          a.nav__link.nav__link--active(href='#')= navItem
+      else
+        li.nav__item
+          a.nav__link(href='#')= navItem

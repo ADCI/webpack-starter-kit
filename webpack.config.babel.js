@@ -243,13 +243,17 @@ module.exports = env => {
       new webpack.DefinePlugin({
         LANG: JSON.stringify("en")
       }),
+
       new webpack.optimize.CommonsChunkPlugin({
         name: "common"
       }),
+
       new HtmlWebpackPlugin({
-        template: 'pug/main.pug'
+        template: 'pug/index.pug'
       }),
+
       extractStyles,
+
       new StyleLintPlugin({
         configFile: '.stylelintrc',
         context: 'src/postcss',

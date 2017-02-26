@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    block page-title
+      title Title
+    include ../base/head
+
+  block vars
+    - var bodyClasses = '';
+
+  body(class=bodyClasses)
+    .page
+      include ../objects/header
+      .content
+        block page-content
+
+      include ../objects/footer
+    include ../base/cellar
+
+
+
