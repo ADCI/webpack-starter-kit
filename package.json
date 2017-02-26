@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Webpack boilerplate config",
   "main": "dist/main.js",
-  "dependencies": {},
+  "dependencies": {
+    "doiuse": "^2.5.0"
+  },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",

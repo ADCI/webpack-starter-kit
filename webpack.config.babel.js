@@ -2,7 +2,7 @@ import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import autoprefixer from 'autoprefixer';
+import postcssAutoprefixer from 'autoprefixer';
 import postcssImport from 'postcss-import';
 import postcssMixins from 'postcss-mixins';
 import postcssVariables from 'postcss-advanced-variables';
@@ -19,7 +19,7 @@ import postcssExtend from 'postcss-extend';
 import postcssSelectorMatches from 'postcss-selector-matches';
 import postcssSelectorNot from 'postcss-selector-not';
 import postcssCalc from 'postcss-calc';
-import cssMqpacker from 'css-mqpacker';
+import postcssMQPacker from 'css-mqpacker';
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 import postcssClearfix from 'postcss-clearfix';
 import postcssColorGray from 'postcss-color-gray';
@@ -35,6 +35,7 @@ import postcssPosition from 'postcss-position';
 import postcssPseudoClassAnyLink from 'postcss-pseudo-class-any-link';
 import postcssPseudoelements from 'postcss-pseudoelements';
 import postcssQuantityQueries from 'postcss-quantity-queries';
+import postcssDoIUse from 'doiuse';
 import postcssReporter from 'postcss-reporter';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 
@@ -84,11 +85,14 @@ const postcssProcessors = [
   postcssCalc,
   postcssInitial,
   postcssFlexbugsFixes,
-  autoprefixer({
+  postcssAutoprefixer({
     browsers: supportedBrowsers,
     cascade: false
   }),
-  cssMqpacker({ sort: true }),
+  postcssMQPacker({ sort: true }),
+  postcssDoIUse({
+    browsers: supportedBrowsers
+  }),
   postcssReporter({ clearMessages: true })
 ];
 
