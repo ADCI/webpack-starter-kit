@@ -42,16 +42,7 @@ import StyleLintPlugin from 'stylelint-webpack-plugin';
 const extractStyles = new ExtractTextPlugin('./css/[name].css');
 const supportedBrowsers = [
   '> 0.5%',
-  'last 2 versions',
-  'ie >= 9',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.1',
-  'bb >= 10'
+  'last 2 versions'
 ];
 const postcssProcessors = [
   postcssImport,

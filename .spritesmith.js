@@ -3,9 +3,9 @@
 var util = require('util');
 
 module.exports = {
-  src: './src/img/sprite/**/*.{png,gif,jpg}',
-  destImage: 'src/img/sprite.png',
-  destCSS: 'src/postcss/sprites/sprite-png.css',
+  src: './src/img/sprite-png/**/*.{png,gif,jpg}',
+  destImage: './src/img/sprite.png',
+  destCSS: './src/postcss/sprites/sprite-png.css',
   padding: 2,
   algorithm: 'top-down',
   algorithmOpts: { sort: false },
