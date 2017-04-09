@@ -1,23 +1,35 @@
+:root {
+  --main-font: var(--f-sans-serif);
+  --main-font-size: 14px;
+  --main-line-height: 1.5;
+  --heading-font: var(--f-sans-serif);
+  --heading-line-height: 1.1;
+  --main-text-color: var(--c-black);
+  --secondary-text-color: var(--c-white);
+  --link-color: inherit;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  font-family: $heading-font;
-  line-height: $heading-line-height;
-  font-weight: 700;
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  line-height: var(--heading-line-height);
 }
 
 p {
-  margin-bottom: 1em;
-
   &:last-child {
     margin-bottom: 0;
   }

@@ -1,0 +1,21 @@
+/* Vendors */
+@import "~normalize.css";
+
+/* Setup */
+@import "base/settings";
+
+/* Mixins */
+@import "tools/mixins";
+
+/* Base styles */
+@import "base/elements";
+
+/* Objects */
+@import "objects/typography";
+@import "objects/layout";
+@import "objects/buttons";
+
+/* Components */
+@import "components/header";
+@import "components/footer";
+@import "components/nav";

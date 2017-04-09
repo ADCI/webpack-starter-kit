@@ -1,0 +1,55 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+```html
+<i class="icon-home"></i>
+```
+*/
+.ic-analytics-1:before {
+  background-image: url(sprite.png);
+  background-position: 0px 0px;
+  width: 512px;
+  height: 512px;
+}
+.ic-analytics-2:before {
+  background-image: url(sprite.png);
+  background-position: 0px -514px;
+  width: 512px;
+  height: 512px;
+}
+.ic-analytics-3:before {
+  background-image: url(sprite.png);
+  background-position: 0px -1028px;
+  width: 512px;
+  height: 512px;
+}
+.ic-analytics-4:before {
+  background-image: url(sprite.png);
+  background-position: 0px -1542px;
+  width: 512px;
+  height: 512px;
+}
+.ic-analytics-5:before {
+  background-image: url(sprite.png);
+  background-position: 0px -2056px;
+  width: 512px;
+  height: 512px;
+}
+.ic-analytics-6:before {
+  background-image: url(sprite.png);
+  background-position: 0px -2570px;
+  width: 512px;
+  height: 512px;
+}
+.ic-analytics-7:before {
+  background-image: url(sprite.png);
+  background-position: 0px -3084px;
+  width: 512px;
+  height: 512px;
+}
+.ic-analytics:before {
+  background-image: url(sprite.png);
+  background-position: 0px -3598px;
+  width: 512px;
+  height: 512px;
+}

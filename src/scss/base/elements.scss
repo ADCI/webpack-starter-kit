@@ -10,16 +10,16 @@
 /* stylelint-enable selector-no-universal */
 
 html {
-  font-family: var(--main-font);
-  font-size: var(--main-font-size);
-  line-height: var(--main-line-height);
-  color: var(--main-text-color);
+  font-family: $main-font;
+  font-size: $main-font-size;
+  line-height: $main-line-height;
+  color: $main-text-color;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
 
 body {
-  background: var(--main-bg);
+  background: $main-bg;
 }
 
 audio,
@@ -47,3 +47,5 @@ button,
 input[type="submit"] {
   cursor: pointer;
 }
+
+

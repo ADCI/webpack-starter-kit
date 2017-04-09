@@ -2,89 +2,65 @@ import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import postcssAutoprefixer from 'autoprefixer';
+import autoprefixer from 'autoprefixer';
+import cssMqpacker from 'css-mqpacker';
+import postcssNext from 'postcss-cssnext';
 import postcssImport from 'postcss-import';
-import postcssMixins from 'postcss-mixins';
-import postcssVariables from 'postcss-advanced-variables';
-import postcssCustomSelectors from 'postcss-custom-selectors';
-import postcssCustomMedia from 'postcss-custom-media';
-import postcssCustomProperties from 'postcss-custom-properties';
-import postcssMediaMinMax from 'postcss-media-minmax';
-import postcssColorFunction from 'postcss-color-function';
-import postcssNesting from 'postcss-nesting';
-import postcssNested from 'postcss-nested';
-import postcssAtRoot from 'postcss-atroot';
-import postcssPropertyLookup from 'postcss-property-lookup';
 import postcssExtend from 'postcss-extend';
-import postcssSelectorMatches from 'postcss-selector-matches';
-import postcssSelectorNot from 'postcss-selector-not';
-import postcssCalc from 'postcss-calc';
-import postcssMQPacker from 'css-mqpacker';
-import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
-import postcssClearfix from 'postcss-clearfix';
-import postcssColorGray from 'postcss-color-gray';
-import postcssColorHexAlpha from 'postcss-color-hex-alpha';
-import postcssColorHwb from 'postcss-color-hwb';
-import postcssColorRebeccapurple from 'postcss-color-rebeccapurple';
-import postcssEasings from 'postcss-easings';
-import postcssFontVariant from 'postcss-font-variant';
-import postcssHexrgba from 'postcss-hexrgba';
-import postcssInitial from 'postcss-initial';
-import postcssInputStyle from 'postcss-input-style';
-import postcssPosition from 'postcss-position';
-import postcssPseudoClassAnyLink from 'postcss-pseudo-class-any-link';
-import postcssPseudoelements from 'postcss-pseudoelements';
-import postcssQuantityQueries from 'postcss-quantity-queries';
-import postcssDoIUse from 'doiuse';
+import doIUse from 'doiuse';
 import postcssReporter from 'postcss-reporter';
+import cssnano from 'cssnano';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 
 const extractStyles = new ExtractTextPlugin('./css/[name].css');
+
 const supportedBrowsers = [
   '> 0.5%',
   'last 2 versions'
 ];
 const postcssProcessors = [
   postcssImport,
-  postcssMixins,
-  postcssVariables,
-  postcssCustomSelectors,
-  postcssCustomMedia,
-  postcssCustomProperties,
-  postcssMediaMinMax,
-  postcssColorFunction,
-  postcssColorGray,
-  postcssColorHexAlpha,
-  postcssColorHwb,
-  postcssColorRebeccapurple,
-  postcssEasings,
-  postcssFontVariant,
-  postcssHexrgba,
-  postcssPseudoClassAnyLink,
-  postcssInputStyle,
-  postcssPosition,
-  postcssNesting,
-  postcssNested,
-  postcssAtRoot,
-  postcssPropertyLookup,
   postcssExtend,
-  postcssSelectorMatches,
-  postcssSelectorNot,
-  postcssClearfix,
-  postcssQuantityQueries,
-  postcssPseudoelements,
-  postcssCalc,
-  postcssInitial,
-  postcssFlexbugsFixes,
-  postcssAutoprefixer({
+  postcssNext({ browsers: supportedBrowsers }),
+  doIUse({
+    browsers: supportedBrowsers
+  }),
+  postcssReporter({ clearReportedMessages: true })
+];
+const postcssProcessorsProd = [
+  postcssImport,
+  postcssExtend,
+  postcssNext({ browsers: supportedBrowsers }),
+  doIUse({
+    browsers: supportedBrowsers
+  }),
+  cssMqpacker({ sort: true }),
+  cssnano({
+    autoprefixer: false
+  }),
+  postcssReporter({ clearReportedMessages: true })
+];
+const scssProcessors = [
+  autoprefixer({
     browsers: supportedBrowsers,
     cascade: false
   }),
-  postcssMQPacker({ sort: true }),
-  postcssDoIUse({
+  doIUse({
     browsers: supportedBrowsers
   }),
-  postcssReporter({ clearMessages: true })
+];
+const scssProcessorsProd = [
+  autoprefixer({
+    browsers: supportedBrowsers,
+    cascade: false
+  }),
+  doIUse({
+    browsers: supportedBrowsers
+  }),
+  cssMqpacker({ sort: true }),
+  cssnano({
+    autoprefixer: false
+  }),
 ];
 
 module.exports = env => {
@@ -103,7 +79,7 @@ module.exports = env => {
 
     watch: env.dev,
 
-    devtool: env.dev ? 'cheap-module-eval-source-map' : null,
+    devtool: env.dev ? 'cheap-module-eval-source-map' : false,
 
     devServer: {
       contentBase: path.join(__dirname, "dist"),
@@ -150,8 +126,7 @@ module.exports = env => {
                 loader: 'postcss-loader',
                 options: {
                   sourceMap: 'inline',
-                  plugins: () => postcssProcessors,
-                  syntax: 'postcss-scss'
+                  plugins: () => postcssProcessors
                 }
               }
             ]
@@ -174,9 +149,28 @@ module.exports = env => {
                 loader: 'postcss-loader',
                 options: {
                   sourceMap: 'inline',
-                  plugins: () => postcssProcessors,
-                  syntax: 'postcss-scss'
+                  plugins: () => postcssProcessors
                 }
+              }
+            ]
+          })
+        },
+        {
+          test: /\.scss$/,
+          use: extractStyles.extract({
+            use: [
+              {
+                loader: "css-loader"
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: 'inline',
+                  plugins: () => scssProcessors
+                }
+              },
+              {
+                loader: "sass-loader"
               }
             ]
           })

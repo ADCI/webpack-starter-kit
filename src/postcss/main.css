@@ -1,19 +1,24 @@
-/* Setup */
-@import "./base/vars";
-@import "./base/mixins";
-
 /* Vendors */
 @import "normalize.css";
 
+/* Sprites */
+@import "sprite-png.css";
+
+/* Setup */
+@import "./base/settings.css";
+
+/* Tools */
+@import "./tools/mixins.css";
+
 /* Base styles */
-@import "./base/elements";
+@import "./base/elements.css";
 
 /* Objects */
-@import "./objects/typography";
-@import "./objects/layout";
-@import "./objects/buttons";
+@import "./objects/typography.css";
+@import "./objects/layout.css";
+@import "./objects/buttons.css";
 
 /* Components */
-@import "./components/header";
-@import "./components/footer";
-@import "./components/nav";
+@import "./components/header.css";
+@import "./components/footer.css";
+@import "./components/nav.css";

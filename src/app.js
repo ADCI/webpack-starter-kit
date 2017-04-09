@@ -4,8 +4,7 @@
 import './fonts/main.css';
 
 /* Styles */
-import './postcss/main.css';
+import './scss/main.scss';
 
 /* Scripts */
-
 import './js/main';

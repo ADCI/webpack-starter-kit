@@ -1,31 +1,33 @@
-$container-gutter: 45px;
-$container-width: calc(1700px + $container-gutter * 2);
-$col-gutter: $container-gutter;
+:root {
+  --container-gutter: 15px;
+  --container-width: calc(1200px + var(--container-gutter) * 2);
+  --col-gutter: var(--container-gutter);
+}
 
 .clearfix {
-  @mixin clearfix;
+  @apply --clearfix;
 }
 
 .container {
-  @mixin clearfix;
+  @apply --clearfix;
 
   display: block;
   width: auto;
-  max-width: $container-width;
-  padding-left: $container-gutter;
-  padding-right: $container-gutter;
+  max-width: var(--container-width);
+  padding-left: var(--container-gutter);
+  padding-right: var(--container-gutter);
   margin-left: auto;
   margin-right: auto;
 }
 
 .row {
   display: block;
-  margin-left: -$col-gutter;
-  margin-right: -$col-gutter;
+  margin-left: -var(--col-gutter);
+  margin-right: -var(--col-gutter);
 }
 
 .col {
   display: block;
-  padding-right: $col-gutter;
-  padding-left: $col-gutter;
+  padding-right: var(--col-gutter);
+  padding-left: var(--col-gutter);
 }
