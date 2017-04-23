@@ -3,69 +3,37 @@ import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
-import cssMqpacker from 'css-mqpacker';
 import postcssNext from 'postcss-cssnext';
 import postcssImport from 'postcss-import';
 import postcssExtend from 'postcss-extend';
-import doIUse from 'doiuse';
 import postcssReporter from 'postcss-reporter';
-import cssnano from 'cssnano';
+import doIUse from 'doiuse';
+import cssMqpacker from 'css-mqpacker';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 
-const extractStyles = new ExtractTextPlugin('./css/[name].css');
+const extractStyles = new ExtractTextPlugin({ filename: './css/[name].css' });
 
 const supportedBrowsers = [
   '> 0.5%',
   'last 2 versions'
 ];
+
 const postcssProcessors = [
   postcssImport,
   postcssExtend,
   postcssNext({ browsers: supportedBrowsers }),
-  doIUse({
-    browsers: supportedBrowsers
-  }),
   postcssReporter({ clearReportedMessages: true })
 ];
-const postcssProcessorsProd = [
-  postcssImport,
-  postcssExtend,
-  postcssNext({ browsers: supportedBrowsers }),
-  doIUse({
-    browsers: supportedBrowsers
-  }),
-  cssMqpacker({ sort: true }),
-  cssnano({
-    autoprefixer: false
-  }),
-  postcssReporter({ clearReportedMessages: true })
-];
+
 const scssProcessors = [
   autoprefixer({
     browsers: supportedBrowsers,
     cascade: false
-  }),
-  doIUse({
-    browsers: supportedBrowsers
-  }),
-];
-const scssProcessorsProd = [
-  autoprefixer({
-    browsers: supportedBrowsers,
-    cascade: false
-  }),
-  doIUse({
-    browsers: supportedBrowsers
-  }),
-  cssMqpacker({ sort: true }),
-  cssnano({
-    autoprefixer: false
-  }),
+  })
 ];
 
 module.exports = env => {
   return {
-
     context: path.resolve(__dirname, 'src'),
 
     entry: {
@@ -112,7 +80,6 @@ module.exports = env => {
         },
         {
           test: /\.css$/,
-          exclude: path.resolve(__dirname, 'src/fonts'),
           use: extractStyles.extract({
             use: [
               {
@@ -126,30 +93,7 @@ module.exports = env => {
                 loader: 'postcss-loader',
                 options: {
                   sourceMap: 'inline',
-                  plugins: () => postcssProcessors
-                }
-              }
-            ]
-          })
-        },
-        {
-          test: /\.css$/,
-          include: path.resolve(__dirname, 'src/fonts'),
-          use: extractStyles.extract({
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  sourceMap: true,
-                  import: false,
-                  url: false
-                }
-              },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: 'inline',
-                  plugins: () => postcssProcessors
+                  plugins: () => postcssProcessors,
                 }
               }
             ]
@@ -193,7 +137,8 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                name: './assets/[name].[ext]'
+                name: './assets/[name].[ext]',
+                publicPath: '../'
               }
             },
             {
@@ -220,7 +165,8 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                name: './assets/[name].[ext]'
+                name: './assets/[name].[ext]',
+                publicPath: '../'
               }
             }
           ]
