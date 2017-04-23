@@ -192,13 +192,13 @@ module.exports = env => {
           use: [
             {
               loader: 'file-loader',
-              query: {
+              options: {
                 name: './assets/[name].[ext]'
               }
             },
             {
               loader: 'image-webpack-loader',
-              query: {
+              options: {
                 progressive: true,
                 pngquant: {
                   quality: '75-90',
@@ -219,7 +219,7 @@ module.exports = env => {
           use: [
             {
               loader: 'file-loader',
-              query: {
+              options: {
                 name: './assets/[name].[ext]'
               }
             }
