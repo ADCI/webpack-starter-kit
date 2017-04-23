@@ -1,6 +1,6 @@
 {
   "name": "webpack-starter-kit",
-  "version": "1.0.0-beta",
+  "version": "0.2.0",
   "description": "Webpack boilerplate config",
   "keywords": [
     "webpack",
@@ -16,7 +16,27 @@
     "url": "https://github.com/ADCI/webpack-starter-kit"
   },
   "main": "webpack.config.babel.js",
-  "dependencies": {},
+  "engines": {
+    "node": ">=4.2.6"
+  },
+  "private": true,
+  "scripts": {
+    "sprites": "npm-run-all --parallel sprites:*",
+    "sprites:png": "spritesmith --rc .spritesmith.js",
+    "clean": "npm-run-all clean:*",
+    "clean:dist": "rimraf dist",
+    "prestart": "npm-run-all --parallel clean sprites",
+    "start": "webpack --env.dev --progress",
+    "start:with-server": "webpack-dev-server --open --env.dev",
+    "prebuild": "npm-run-all --parallel clean sprites",
+    "prebuild:prod": "npm-run-all --parallel clean sprites",
+    "build": "webpack --env.build --progress",
+    "build:prod": "webpack --env.prod -p",
+    "debug": "webpack -d --env.dev --display-error-details"
+  },
+  "dependencies": {
+    "normalize.css": "^6.0.0"
+  },
   "devDependencies": {
     "stylelint-scss": "^1.4.4",
     "autoprefixer": "^6.7.2",
@@ -47,7 +67,6 @@
     "image-webpack-loader": "^3.2.0",
     "imports-loader": "^0.7.0",
     "node-sass": "^4.5.2",
-    "normalize.css": "^6.0.0",
     "npm-run-all": "^4.0.1",
     "onchange": "^3.2.1",
     "parallelshell": "^2.0.0",
@@ -67,25 +86,5 @@
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
-  },
-  "scripts": {
-    "sprites": "npm-run-all --parallel sprites:*",
-    "sprites:png": "spritesmith --rc .spritesmith.js",
-    "clean": "npm-run-all clean:*",
-    "clean:dist": "rimraf dist",
-    "copy": "npm-run-all copy:*",
-    "copy:fonts": "copyfiles -f 'src/fonts/**/*.{otf,ttf,woff,woff2}' 'dist/assets/'",
-    "clean-and-copy": "npm-run-all clean copy",
-    "prestart": "npm-run-all --parallel clean-and-copy sprites",
-    "start": "webpack-dev-server --open --env.dev",
-    "prebuild": "npm-run-all --parallel clean-and-copy sprites",
-    "prebuild:prod": "npm-run-all --parallel clean-and-copy sprites",
-    "build": "webpack --env.dev --progress",
-    "build:prod": "webpack --env.prod -p",
-    "debug": "webpack -d --env.dev --display-error-details"
-  },
-  "engines": {
-    "node": ">=4.2.6"
-  },
-  "private": true
+  }
 }
