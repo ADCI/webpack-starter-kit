@@ -1,12 +1,24 @@
 {
   "name": "webpack-starter-kit",
-  "version": "0.1.0",
+  "version": "1.0.0-beta",
   "description": "Webpack boilerplate config",
-  "main": "dist/main.js",
-  "dependencies": {
-    "stylelint-scss": "^1.4.4"
+  "keywords": [
+    "webpack",
+    "front-end build"
+  ],
+  "homepage": "https://github.com/ADCI/webpack-starter-kit",
+  "bugs": {
+    "url": "https://github.com/ADCI/webpack-starter-kit/issues",
+    "email": "guryanov.artyom@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ADCI/webpack-starter-kit"
+  },
+  "main": "webpack.config.babel.js",
+  "dependencies": {},
   "devDependencies": {
+    "stylelint-scss": "^1.4.4",
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
