@@ -1,0 +1,127 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+$analytics-1-x: 0px;
+$analytics-1-y: 0px;
+$analytics-1-offset-x: 0px;
+$analytics-1-offset-y: 0px;
+$analytics-1-width: 512px;
+$analytics-1-height: 512px;
+$analytics-1-total-width: 1540px;
+$analytics-1-total-height: 1540px;
+$analytics-1-image: '../img/sprite.png';
+$analytics-1: 0px 0px 0px 0px 512px 512px 1540px 1540px '../img/sprite.png';
+$analytics-2-x: 514px;
+$analytics-2-y: 0px;
+$analytics-2-offset-x: -514px;
+$analytics-2-offset-y: 0px;
+$analytics-2-width: 512px;
+$analytics-2-height: 512px;
+$analytics-2-total-width: 1540px;
+$analytics-2-total-height: 1540px;
+$analytics-2-image: '../img/sprite.png';
+$analytics-2: 514px 0px -514px 0px 512px 512px 1540px 1540px '../img/sprite.png';
+$analytics-3-x: 0px;
+$analytics-3-y: 514px;
+$analytics-3-offset-x: 0px;
+$analytics-3-offset-y: -514px;
+$analytics-3-width: 512px;
+$analytics-3-height: 512px;
+$analytics-3-total-width: 1540px;
+$analytics-3-total-height: 1540px;
+$analytics-3-image: '../img/sprite.png';
+$analytics-3: 0px 514px 0px -514px 512px 512px 1540px 1540px '../img/sprite.png';
+$analytics-4-x: 514px;
+$analytics-4-y: 514px;
+$analytics-4-offset-x: -514px;
+$analytics-4-offset-y: -514px;
+$analytics-4-width: 512px;
+$analytics-4-height: 512px;
+$analytics-4-total-width: 1540px;
+$analytics-4-total-height: 1540px;
+$analytics-4-image: '../img/sprite.png';
+$analytics-4: 514px 514px -514px -514px 512px 512px 1540px 1540px '../img/sprite.png';
+$analytics-5-x: 1028px;
+$analytics-5-y: 0px;
+$analytics-5-offset-x: -1028px;
+$analytics-5-offset-y: 0px;
+$analytics-5-width: 512px;
+$analytics-5-height: 512px;
+$analytics-5-total-width: 1540px;
+$analytics-5-total-height: 1540px;
+$analytics-5-image: '../img/sprite.png';
+$analytics-5: 1028px 0px -1028px 0px 512px 512px 1540px 1540px '../img/sprite.png';
+$analytics-6-x: 1028px;
+$analytics-6-y: 514px;
+$analytics-6-offset-x: -1028px;
+$analytics-6-offset-y: -514px;
+$analytics-6-width: 512px;
+$analytics-6-height: 512px;
+$analytics-6-total-width: 1540px;
+$analytics-6-total-height: 1540px;
+$analytics-6-image: '../img/sprite.png';
+$analytics-6: 1028px 514px -1028px -514px 512px 512px 1540px 1540px '../img/sprite.png';
+$analytics-7-x: 0px;
+$analytics-7-y: 1028px;
+$analytics-7-offset-x: 0px;
+$analytics-7-offset-y: -1028px;
+$analytics-7-width: 512px;
+$analytics-7-height: 512px;
+$analytics-7-total-width: 1540px;
+$analytics-7-total-height: 1540px;
+$analytics-7-image: '../img/sprite.png';
+$analytics-7: 0px 1028px 0px -1028px 512px 512px 1540px 1540px '../img/sprite.png';
+$analytics-x: 514px;
+$analytics-y: 1028px;
+$analytics-offset-x: -514px;
+$analytics-offset-y: -1028px;
+$analytics-width: 512px;
+$analytics-height: 512px;
+$analytics-total-width: 1540px;
+$analytics-total-height: 1540px;
+$analytics-image: '../img/sprite.png';
+$analytics: 514px 1028px -514px -1028px 512px 512px 1540px 1540px '../img/sprite.png';
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}

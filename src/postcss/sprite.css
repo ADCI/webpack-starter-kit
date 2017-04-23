@@ -5,51 +5,51 @@ Icon classes can be used entirely standalone. They are named after their origina
 <i class="icon-home"></i>
 ```
 */
-.ic-analytics-1:before {
+.icon-analytics-1::before {
   background-image: url(../img/sprite.png);
   background-position: 0px 0px;
   width: 512px;
   height: 512px;
 }
-.ic-analytics-2:before {
+.icon-analytics-2::before {
+  background-image: url(../img/sprite.png);
+  background-position: -514px 0px;
+  width: 512px;
+  height: 512px;
+}
+.icon-analytics-3::before {
   background-image: url(../img/sprite.png);
   background-position: 0px -514px;
   width: 512px;
   height: 512px;
 }
-.ic-analytics-3:before {
+.icon-analytics-4::before {
+  background-image: url(../img/sprite.png);
+  background-position: -514px -514px;
+  width: 512px;
+  height: 512px;
+}
+.icon-analytics-5::before {
+  background-image: url(../img/sprite.png);
+  background-position: -1028px 0px;
+  width: 512px;
+  height: 512px;
+}
+.icon-analytics-6::before {
+  background-image: url(../img/sprite.png);
+  background-position: -1028px -514px;
+  width: 512px;
+  height: 512px;
+}
+.icon-analytics-7::before {
   background-image: url(../img/sprite.png);
   background-position: 0px -1028px;
   width: 512px;
   height: 512px;
 }
-.ic-analytics-4:before {
+.icon-analytics::before {
   background-image: url(../img/sprite.png);
-  background-position: 0px -1542px;
-  width: 512px;
-  height: 512px;
-}
-.ic-analytics-5:before {
-  background-image: url(../img/sprite.png);
-  background-position: 0px -2056px;
-  width: 512px;
-  height: 512px;
-}
-.ic-analytics-6:before {
-  background-image: url(../img/sprite.png);
-  background-position: 0px -2570px;
-  width: 512px;
-  height: 512px;
-}
-.ic-analytics-7:before {
-  background-image: url(../img/sprite.png);
-  background-position: 0px -3084px;
-  width: 512px;
-  height: 512px;
-}
-.ic-analytics:before {
-  background-image: url(../img/sprite.png);
-  background-position: 0px -3598px;
+  background-position: -514px -1028px;
   width: 512px;
   height: 512px;
 }

@@ -3,15 +3,14 @@
 var util = require('util');
 
 module.exports = {
-  src: './src/img/sprite-png/**/*.{png,gif,jpg}',
+  src: './src/img/sprite/**/*.{png,gif,jpg}',
   destImage: './src/img/sprite.png',
-  destCSS: './src/postcss/sprite-png.css',
+  destCSS: './src/postcss/sprite.css',
   padding: 2,
-  algorithm: 'top-down',
-  algorithmOpts: { sort: false },
+  algorithm: 'binary-tree',
   cssOpts: {
     cssClass: function (item) {
-      return util.format('.ic-%s:before', item.name);
+      return util.format('.icon-%s::before', item.name);
     }
   }
 };
