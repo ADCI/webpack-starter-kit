@@ -14,7 +14,7 @@ $heading-line-height: 1.1;
 $main-bg: $c-white;
 $main-text-color: $c-black;
 $secondary-text-color: $c-white;
-$link-color: inherit;
+$link-color: $main-text-color;
 $default-transition-time: 0.3s;
 $default-transition: all $default-transition-time ease;
 
