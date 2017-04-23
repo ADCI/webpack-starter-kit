@@ -4,11 +4,7 @@
   "description": "Webpack boilerplate config",
   "main": "dist/main.js",
   "dependencies": {
-    "doiuse": "^2.5.0",
-    "node-sass": "^4.5.2",
-    "postcss-cssnext": "^2.10.0",
-    "postcss-extend": "^1.0.5",
-    "postcss-import": "^9.1.0"
+    "stylelint-scss": "^1.4.4"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -24,6 +20,7 @@
     "css-loader": "^0.28.0",
     "css-mqpacker": "^5.0.1",
     "cssnano": "^3.10.0",
+    "doiuse": "^2.5.0",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-loader": "^1.6.1",
@@ -37,10 +34,14 @@
     "html-webpack-plugin": "^2.28.0",
     "image-webpack-loader": "^3.2.0",
     "imports-loader": "^0.7.0",
+    "node-sass": "^4.5.2",
     "normalize.css": "^6.0.0",
     "npm-run-all": "^4.0.1",
     "onchange": "^3.2.1",
     "parallelshell": "^2.0.0",
+    "postcss-cssnext": "^2.10.0",
+    "postcss-extend": "^1.0.5",
+    "postcss-import": "^9.1.0",
     "postcss-loader": "^1.2.2",
     "postcss-reporter": "^3.0.0",
     "pug-html-loader": "^1.1.0",
