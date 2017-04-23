@@ -25,6 +25,8 @@
     "no-eol-whitespace": null
   },
   "ignoreFiles": [
-    "node_modules"
+    "node_modules",
+    "src/scss/sprite.scss",
+    "src/postcss/sprite.css"
   ]
 }
