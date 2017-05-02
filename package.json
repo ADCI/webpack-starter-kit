@@ -17,7 +17,7 @@
   },
   "main": "webpack.config.babel.js",
   "engines": {
-    "node": ">=4.2.6"
+    "node": ">=6.9.5 <7"
   },
   "private": true,
   "scripts": {
