@@ -104,7 +104,10 @@ module.exports = env => {
           use: extractStyles.extract({
             use: [
               {
-                loader: "css-loader"
+                loader: "css-loader",
+                options: {
+                  sourceMap: true
+                }
               },
               {
                 loader: 'postcss-loader',
@@ -114,7 +117,10 @@ module.exports = env => {
                 }
               },
               {
-                loader: "sass-loader"
+                loader: "sass-loader",
+                options: {
+                  sourceMap: true
+                }
               }
             ]
           })
