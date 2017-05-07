@@ -18,7 +18,7 @@ Build:
 
 Styles:
 - Normalize.css
-- PostCSS: CSSNext **OR** Sass + autoprefixer + 
+- PostCSS: CSSNext **OR** Sass + autoprefixer
 - Sourcemaps
 
 **Note** You can choose only PostCSS or Sass (default is Sass): just change `STYLES` variable in package.json and delete unecessary folder (/src/postcss or /src/scss).
