@@ -21,7 +21,10 @@ Styles:
 - PostCSS: CSSNext **OR** Sass + autoprefixer
 - Sourcemaps
 
-**Note** You can choose only PostCSS or Sass (default is Sass): just change `STYLES` variable in package.json and delete unecessary folder (/src/postcss or /src/scss).
+**Note** You can choose only PostCSS or Sass (default is Sass):
+- change `STYLES` variable in package.json
+- remove unecessary folder (/src/postcss or /src/scss).
+- change styles file include in src/app.js
 
 Scripts: 
 - Javascript: ES2015, ES2016
