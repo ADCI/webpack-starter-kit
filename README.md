@@ -3,12 +3,12 @@
 Build set-up based on webpack and npm scripts for common needs.
 
 ## Concepts
-- divide source code from compiled
-- separate production task
+- dividing source code from compiled
+- separated production task
 - modularity
 - modern, future-proof technologies
 - linting (code style / syntax errors checking)
-- browsers live reload
+- browsers live reloading
 - dependencies through node modules (you can install libraries through NPM and import them in your styles/scripts)
 
 ## Content
@@ -18,18 +18,17 @@ Build:
 
 Styles:
 - Normalize.css
-- PostCSS: CSSNext
-- Sass + autoprefixer
+- PostCSS: CSSNext **OR** Sass + autoprefixer + 
 - Sourcemaps
 
-**Note** You can choose only PostCSS or Sass (default is Sass): just change `stylesType` variable and delete unecessary folder (/src/postcss or /src/scss).
+**Note** You can choose only PostCSS or Sass (default is Sass): just change `STYLES` variable in package.json and delete unecessary folder (/src/postcss or /src/scss).
 
 Scripts: 
 - Javascript: ES2015, ES2016
 - Sourcemaps
 
 Code style checking:
-- (Styles) Stylelint: standard config (+ optional: `stylelint-scss` for sass) + some sensible settings
+- (Styles) Stylelint: standard config (+ `stylelint-scss` for Sass) + some sensible settings
 - (Scripts) ESLint: recommended config (+ optional: Airbnb config)
 
 Images:
