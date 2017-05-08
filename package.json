@@ -26,13 +26,13 @@
     "clean": "npm-run-all clean:*",
     "clean:dist": "rimraf dist",
     "prestart": "npm-run-all --parallel clean sprites",
-    "start": "cross-env STYLES=postcss webpack --progress --env.dev",
-    "start:webpack-server": "cross-env STYLES=postcss webpack-dev-server --open --env.dev",
+    "start": "cross-env STYLES=scss webpack --progress --env.dev",
+    "start:webpack-server": "cross-env STYLES=scss webpack-dev-server --open --env.dev",
     "prebuild": "npm-run-all --parallel clean sprites",
     "prebuild:prod": "npm-run-all --parallel clean sprites",
-    "build": "cross-env STYLES=postcss webpack --progress --env.build ",
-    "build:prod": "cross-env STYLES=postcss webpack -p --env.prod",
-    "debug": "cross-env STYLES=postcss webpack -d --display-error-details --env.dev",
+    "build": "cross-env STYLES=scss webpack --progress --env.build ",
+    "build:prod": "cross-env STYLES=scss webpack -p --env.prod",
+    "debug": "cross-env STYLES=scss webpack -d --display-error-details --env.dev",
     "lint:autofix": "stylefmt src/scss/main.scss && eslint src/js --fix"
   },
   "dependencies": {
