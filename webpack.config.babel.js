@@ -7,11 +7,10 @@ import postcssNext from 'postcss-cssnext';
 import postcssImport from 'postcss-import';
 import postcssExtend from 'postcss-extend';
 import postcssReporter from 'postcss-reporter';
-import doIUse from 'doiuse';
-import cssMqpacker from 'css-mqpacker';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
+import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 
-const extractStyles = new ExtractTextPlugin({ filename: './css/[name].css' });
+const extractStyles = new ExtractTextPlugin({ filename: 'css/[name].css' });
 
 const supportedBrowsers = [
   '> 0.5%',
@@ -22,17 +21,21 @@ const postcssProcessors = [
   postcssImport,
   postcssExtend,
   postcssNext({ browsers: supportedBrowsers }),
-  postcssReporter({ clearReportedMessages: true })
+  postcssReporter({ clearReportedMessages: true }),
 ];
 
 const scssProcessors = [
   autoprefixer({
     browsers: supportedBrowsers,
     cascade: false
-  })
+  }),
+  postcssReporter({ clearReportedMessages: true }),
 ];
 
 module.exports = env => {
+  const stylesType = process.env.STYLES; // postcss or scss
+  const stylesExtension = stylesType === 'scss' ? '.scss' : '.css';
+
   return {
     context: path.resolve(__dirname, 'src'),
 
@@ -42,7 +45,7 @@ module.exports = env => {
 
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: './js/[name].js'
+      filename: 'js/[name].js'
     },
 
     watch: env.dev,
@@ -85,7 +88,6 @@ module.exports = env => {
               {
                 loader: 'css-loader',
                 options: {
-                  importLoaders: 1,
                   sourceMap: true,
                 }
               },
@@ -93,10 +95,11 @@ module.exports = env => {
                 loader: 'postcss-loader',
                 options: {
                   sourceMap: 'inline',
-                  plugins: () => postcssProcessors,
+                  plugins: (loader) => postcssProcessors,
                 }
               }
-            ]
+            ],
+            publicPath: '../'
           })
         },
         {
@@ -113,7 +116,7 @@ module.exports = env => {
                 loader: 'postcss-loader',
                 options: {
                   sourceMap: 'inline',
-                  plugins: () => scssProcessors
+                  plugins: (loader) => scssProcessors
                 }
               },
               {
@@ -122,7 +125,8 @@ module.exports = env => {
                   sourceMap: true
                 }
               }
-            ]
+            ],
+            publicPath: '../'
           })
         },
         {
@@ -143,8 +147,7 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                name: 'assets/[name].[ext]',
-                publicPath: '../'
+                name: 'assets/[name].[ext]'
               }
             },
             {
@@ -171,8 +174,7 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                name: 'assets/[name].[ext]',
-                publicPath: '../'
+                name: 'assets/[name].[ext]'
               }
             }
           ]
@@ -197,11 +199,22 @@ module.exports = env => {
 
       new StyleLintPlugin({
         configFile: '.stylelintrc',
-        context: 'src/postcss',
-        files: '**/*.css',
+        context: 'src/' + stylesType,
+        files: '**/*' + stylesExtension,
         failOnError: false,
         quiet: true,
       }),
-    ]
+
+      new BrowserSyncPlugin({
+        files: "src/**/*.*",
+        hostname: "localhost",
+        port: 8080,
+        server: { baseDir: ['dist'] },
+        reloadDelay: 50,
+        injectChanges: false,
+        reloadDebounce: 500,
+        reloadOnRestart: true
+      }),
+    ],
   }
 };

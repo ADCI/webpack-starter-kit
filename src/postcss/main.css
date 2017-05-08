@@ -2,13 +2,13 @@
 @import "normalize.css";
 
 /* Sprites */
-@import "sprite-png.css";
+@import "./sprites/main.css";
 
 /* Setup */
-@import "./base/settings.css";
+@import "./settings/settings.css";
 
 /* Tools */
-@import "./tools/mixins.css";
+@import "./utilities/mixins.css";
 
 /* Base styles */
 @import "./base/elements.css";

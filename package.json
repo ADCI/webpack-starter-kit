@@ -1,6 +1,6 @@
 {
   "name": "webpack-starter-kit",
-  "version": "1.0.0-beta",
+  "version": "1.0.0",
   "description": "Webpack boilerplate config",
   "keywords": [
     "webpack",
@@ -17,7 +17,7 @@
   },
   "main": "webpack.config.babel.js",
   "engines": {
-    "node": ">=6.9.5 <7"
+    "node": ">=6.9.0"
   },
   "private": true,
   "scripts": {
@@ -26,19 +26,23 @@
     "clean": "npm-run-all clean:*",
     "clean:dist": "rimraf dist",
     "prestart": "npm-run-all --parallel clean sprites",
-    "start": "webpack --env.dev --progress",
-    "start:with-server": "webpack-dev-server --open --env.dev",
+    "start": "cross-env STYLES=postcss webpack --progress --env.dev",
+    "start:webpack-server": "cross-env STYLES=postcss webpack-dev-server --open --env.dev",
     "prebuild": "npm-run-all --parallel clean sprites",
     "prebuild:prod": "npm-run-all --parallel clean sprites",
-    "build": "webpack --env.build --progress",
-    "build:prod": "webpack --env.prod -p",
-    "debug": "webpack -d --env.dev --display-error-details"
+    "build": "cross-env STYLES=postcss webpack --progress --env.build ",
+    "build:prod": "cross-env STYLES=postcss webpack -p --env.prod",
+    "debug": "cross-env STYLES=postcss webpack -d --display-error-details --env.dev",
+    "lint:autofix": "stylefmt src/scss/main.scss && eslint src/js --fix"
   },
   "dependencies": {
-    "normalize.css": "^6.0.0"
+    "normalize.css": "^7.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.2",
+    "browser-sync": "^2.18.8",
+    "browser-sync-webpack-plugin": "^1.1.4",
+    "stylefmt": "^5.3.2",
+    "autoprefixer": "^7.0.1",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.0.0",
@@ -48,16 +52,15 @@
     "babel-runtime": "^6.22.0",
     "bundle-loader": "^0.5.4",
     "copyfiles": "^1.2.0",
+    "cross-env": "^4.0.0",
     "css-loader": "^0.28.0",
-    "css-mqpacker": "^5.0.1",
     "cssnano": "^3.10.0",
-    "doiuse": "^2.5.0",
-    "eslint": "^3.15.0",
+    "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.9.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.0",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.11.1",
@@ -72,7 +75,7 @@
     "postcss-cssnext": "^2.10.0",
     "postcss-extend": "^1.0.5",
     "postcss-import": "^9.1.0",
-    "postcss-loader": "^1.2.2",
+    "postcss-loader": "^1.3.3",
     "postcss-reporter": "^3.0.0",
     "pug-html-loader": "^1.1.0",
     "rimraf": "^2.5.4",

@@ -5,7 +5,7 @@ var util = require('util');
 module.exports = {
   src: './src/img/sprite/**/*.{png,gif,jpg}',
   destImage: './src/img/sprite.png',
-  destCSS: './src/postcss/sprite.css',
+  destCSS: './src/scss/sprites/main.scss',
   padding: 2,
   algorithm: 'binary-tree',
   cssOpts: {

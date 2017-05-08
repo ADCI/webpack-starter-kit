@@ -39,20 +39,23 @@ Images:
 - imagemin
 
 Browsers live reload:
+- BrowserSync
 - Webpack dev server
 
 ## Base structure
 
 **src/**
 
+Entry point: app.js - main project file where all other files are included
+
 PostCSS (postcss/) / Sass (scss/):
 - main source file (main.css / main.scss)
 - base/:
-  - settings: project setup (variables, etc)
   - elements: base html elements styles
 - objects/: OOCSS
 - components/: BEM, Atomic Design
-- tools/: mixins
+- settings/: project setup (variables, etc)
+- utilities/: mixins
   
 JavaScript (js/):
 - main source file (main.js)
@@ -81,8 +84,8 @@ Fonts (fonts/) - source fonts
 ## Usage
 
 - `npm run build` - build project
-- `npm run start` - build and watch changes
-- `npm run start:with-server` - local server which watches your changes (Webpack dev server)
+- `npm run start` - build and watch changes (with BrowserSync)
+- `npm run start:webpack-server` - build and watch changes (with Webpack dev server)
 - `npm run build:prod` - build production-ready code
 
 Also, you can see subtasks in `package.json`.

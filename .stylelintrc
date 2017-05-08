@@ -27,7 +27,7 @@
   },
   "ignoreFiles": [
     "node_modules",
-    "src/scss/sprite.scss",
-    "src/postcss/sprite.css"
+    "src/scss/sprites/*.scss",
+    "src/postcss/sprites/*.css"
   ]
 }
