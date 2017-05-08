@@ -33,7 +33,7 @@
     "build": "cross-env STYLES=scss webpack --progress --env.build ",
     "build:prod": "cross-env STYLES=scss webpack -p --env.prod",
     "debug": "cross-env STYLES=scss webpack -d --display-error-details --env.dev",
-    "lint:autofix": "stylefmt src/scss/main.scss && eslint src/js --fix"
+    "lint:autofix": "stylefmt -c .stylelintrc -r src/scss/**/*.scss && eslint src/js --fix"
   },
   "dependencies": {
     "normalize.css": "^7.0.0"
