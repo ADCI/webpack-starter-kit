@@ -13,10 +13,10 @@ Build set-up based on webpack and npm scripts for common needs.
 
 ## Content
 
-Build:
+#### Build:
 - Webpack 2.x
 
-Styles:
+#### Styles:
 - Normalize.css
 - PostCSS: CSSNext **OR** Sass + autoprefixer
 - Sourcemaps
@@ -26,19 +26,19 @@ Styles:
 - remove unecessary folder (/src/postcss or /src/scss).
 - change styles file include in src/app.js
 
-Scripts: 
+#### Scripts: 
 - Javascript: ES2015, ES2016
 - Sourcemaps
 
-Code style checking:
+#### Code style checking:
 - (Styles) Stylelint: standard config (+ `stylelint-scss` for Sass) + some sensible settings
 - (Scripts) ESLint: recommended config (+ optional: Airbnb config)
 
-Images:
+#### Images:
 - sprites generator (spritesmith)
 - imagemin
 
-Browsers live reload:
+#### Browsers live reload:
 - BrowserSync
 - Webpack dev server
 
@@ -46,9 +46,10 @@ Browsers live reload:
 
 **src/**
 
-Entry point: app.js - main project file where all other files are included
+#### Entry point: 
+- app.js - main project file where all other files are included
 
-PostCSS (postcss/) / Sass (scss/):
+#### PostCSS (postcss/) / Sass (scss/):
 - main source file (main.css / main.scss)
 - base/:
   - elements: base html elements styles
@@ -57,15 +58,15 @@ PostCSS (postcss/) / Sass (scss/):
 - settings/: project setup (variables, etc)
 - utilities/: mixins
   
-JavaScript (js/):
+#### JavaScript (js/):
 - main source file (main.js)
 - modules/: folder for javascript modules
 
-Images (img/):
+#### Images (img/):
 - img/ - source images
 - img/sprite/ - source images for sprite
 
-Fonts (fonts/) - source fonts
+#### Fonts (fonts/) - source fonts
 
 **dist/**
 
