@@ -1,15 +1,16 @@
-# Webpack starter kit
+**Webpack starter kit** - build set-up based on webpack and npm scripts for creating modern front-end projects with basic structure for jump-start your project.
 
-Build set-up based on webpack and npm scripts for common needs.
+# Main features
 
-## Concepts
-- dividing source code from compiled
-- separated production task
-- modularity
-- modern, future-proof technologies
-- linting (code style / syntax errors checking)
-- browsers live reloading
-- dependencies through node modules (you can install libraries through NPM and import them in your styles/scripts)
+- **Webpack** It put together all your dependencies and prepare your code for development or production.
+- **npm scripts** Allow you to get rid of the redundant wrapper in the form of specific plugins for certain builders (Gulp, Grunt).
+- **HTML Templater** Pug will help you to manage your HTML code according to DRY principle and provide you with many features from programming languages which ease development.
+- **Styles** There are 2 variants of styles for your choice: Sass + some PostCSS plugins or only PostCSS(CSSNext). Structure based on BEM, OOCSS, SMACSS methodologies for convenient development and maintainability.
+- **Modern JavaScript**: you can write ES2015, ES2016 and do not worry about browser support - Babel will compile your code to ES5 that have very wide support among browsers.
+- **Local server with live reloading** Webpack Dev Server or BrowserSync provide you with local server and browser live reload saving your from the routine.
+- **Sourcemaps** allow you to see your source code in the browser dev tools
+- **Linters** Stylelint (styles) and ESLint (JavaScript) allow you to see your deviations from industry's standarts and show you syntax mistakes.
+- **npm** This package manager in conjunction with this build allow you to install and update vendor plugins, libraries, etc, and import them in your code easily.
 
 ## Content
 
