@@ -91,6 +91,32 @@ Build set-up based on webpack and npm scripts for common needs.
 
 Also, you can see subtasks in `package.json`.
 
+## Usage with other technologies
+### Drupal
+You should remove HTML processing:
+- delete src/pug folder
+- remove HtmlWebpackPlugin from webpack.config.babel.js config
+```
+new HtmlWebpackPlugin({
+  template: 'pug/index.pug'
+}),
+```
+And set up BrowserSync:
+- remove `server` option from BrowserSyncPlugin in webpack.config.babel.js
+- add `proxy` option with you local development environment address
+```
+new BrowserSyncPlugin({
+  files: "dist/**/*.*",
+  hostname: "localhost",
+  port: 8080,
+  proxy: "local.dev",
+  reloadDelay: 50,
+  injectChanges: false,
+  reloadDebounce: 500,
+  reloadOnRestart: true
+}),
+```
+
 ## Browser support
 
 - \> 0.5%
