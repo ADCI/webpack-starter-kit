@@ -206,7 +206,7 @@ module.exports = env => {
       }),
 
       new BrowserSyncPlugin({
-        files: "src/**/*.*",
+        files: "dist/**/*.*",
         hostname: "localhost",
         port: 8080,
         server: { baseDir: ['dist'] },
