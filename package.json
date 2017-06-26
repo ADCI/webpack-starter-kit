@@ -1,6 +1,6 @@
 {
   "name": "webpack-starter-kit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Webpack boilerplate config",
   "keywords": [
     "webpack",
@@ -33,12 +33,14 @@
     "build": "cross-env STYLES=scss webpack --progress --env.build ",
     "build:prod": "cross-env STYLES=scss webpack -p --env.prod",
     "debug": "cross-env STYLES=scss webpack -d --display-error-details --env.dev",
-    "lint:autofix": "stylefmt -c .stylelintrc -r src/scss/**/*.scss && eslint src/js --fix"
+    "lint:autofix": "stylefmt -c .stylelintrc -r src/scss/**/*.scss && eslint src/js --fix",
+    "postinstall": "del node_modules/**/*.info"
   },
   "dependencies": {
     "normalize.css": "^7.0.0"
   },
   "devDependencies": {
+    "del-cli": "^1.0.0",
     "autoprefixer": "^7.0.1",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
