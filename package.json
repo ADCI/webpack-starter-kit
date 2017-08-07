@@ -34,13 +34,12 @@
     "build:prod": "cross-env STYLES=scss webpack -p --env.prod",
     "debug": "cross-env STYLES=scss webpack -d --display-error-details --env.dev",
     "lint:autofix": "stylefmt -c .stylelintrc -r src/scss/**/*.scss && eslint src/js --fix",
-    "postinstall": "del node_modules/**/*.info"
+    "postinstall": "del-cli node_modules/**/*.info"
   },
   "dependencies": {
     "normalize.css": "^7.0.0"
   },
   "devDependencies": {
-    "del-cli": "^1.0.0",
     "autoprefixer": "^7.0.1",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
@@ -53,6 +52,7 @@
     "browser-sync-webpack-plugin": "^1.1.4",
     "cross-env": "^5.0.0",
     "css-loader": "^0.28.0",
+    "del-cli": "^1.0.0",
     "eslint": "^4.1.1",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-loader": "^1.6.1",
