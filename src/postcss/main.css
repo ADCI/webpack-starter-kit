@@ -17,8 +17,8 @@
 @import "./objects/typography.css";
 @import "./objects/layout.css";
 @import "./objects/buttons.css";
+@import "./objects/header.css";
+@import "./objects/footer.css";
+@import "./objects/nav.css";
 
 /* Components */
-@import "./components/header.css";
-@import "./components/footer.css";
-@import "./components/nav.css";
