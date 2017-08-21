@@ -1,5 +1,5 @@
 $container-gutter: 15px;
-$container-width: calc(1200px + $container-gutter * 2);
+$container-width: calc(1200px + #{$container-gutter} * 2);
 $col-gutter: $container-gutter;
 
 .clearfix {
