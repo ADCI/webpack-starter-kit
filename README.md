@@ -14,7 +14,7 @@ Build set-up based on webpack and npm scripts for common needs.
 ## Content
 
 #### Build:
-- Webpack 2.x
+- Webpack 3.x
 
 #### Styles:
 - Normalize.css
