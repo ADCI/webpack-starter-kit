@@ -13,9 +13,11 @@
 /* Base styles */
 @import "./base/elements.css";
 
+/* Layout */
+@import "./layout/main.css";
+
 /* Objects */
 @import "./objects/typography.css";
-@import "./objects/layout.css";
 @import "./objects/buttons.css";
 @import "./objects/header.css";
 @import "./objects/footer.css";
