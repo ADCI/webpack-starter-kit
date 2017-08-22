@@ -2,7 +2,6 @@ import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import autoprefixer from 'autoprefixer';
 import postcssNext from 'postcss-cssnext';
 import postcssImport from 'postcss-import';
 import postcssExtend from 'postcss-extend';
@@ -12,23 +11,14 @@ import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 
 const extractStyles = new ExtractTextPlugin({ filename: 'css/[name].css' });
 
-const supportedBrowsers = [
-  '> 0.5%',
-  'last 2 versions'
-];
-
 const postcssProcessors = [
   postcssImport,
   postcssExtend,
-  postcssNext({ browsers: supportedBrowsers }),
+  postcssNext,
   postcssReporter({ clearReportedMessages: true }),
 ];
 
 const scssProcessors = [
-  autoprefixer({
-    browsers: supportedBrowsers,
-    cascade: false
-  }),
   postcssReporter({ clearReportedMessages: true }),
 ];
 
@@ -50,7 +40,7 @@ module.exports = env => {
 
     watch: env.dev,
 
-    devtool: env.dev ? 'cheap-module-eval-source-map' : false,
+    devtool: 'cheap-module-eval-source-map',
 
     devServer: {
       contentBase: path.join(__dirname, "dist"),
@@ -63,14 +53,6 @@ module.exports = env => {
           test: /\.js$/,
           include: path.resolve(__dirname, 'src/js'),
           use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                presets: ['es2015', 'es2016'],
-                cacheDirectory: true,
-                plugins: ['transform-runtime']
-              }
-            },
             {
               loader: 'eslint-loader',
               options: {
@@ -150,22 +132,6 @@ module.exports = env => {
                 name: 'assets/[name].[ext]'
               }
             },
-            {
-              loader: 'image-webpack-loader',
-              options: {
-                progressive: true,
-                pngquant: {
-                  quality: '75-90',
-                  speed: 4
-                },
-                mozjpeg: {
-                  quality: 75
-                },
-                gifsicle: {
-                  interlaced: true
-                }
-              }
-            }
           ]
         },
         {
