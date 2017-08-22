@@ -13,7 +13,8 @@ const extractStyles = new ExtractTextPlugin({ filename: 'css/[name].css' });
 
 const supportedBrowsers = [
   '> 0.5%',
-  'last 2 versions'
+  'last 2 versions',
+  'not ie <= 10'
 ];
 
 const postcssProcessors = [
@@ -60,7 +61,6 @@ module.exports = env => {
             {
               loader: 'babel-loader',
               options: {
-                presets: ['es2015', 'es2016'],
                 cacheDirectory: true,
                 plugins: ['transform-runtime']
               }

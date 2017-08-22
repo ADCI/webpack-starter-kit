@@ -37,6 +37,7 @@
     "postinstall": "del-cli node_modules/**/*.info"
   },
   "dependencies": {
+    "babel-preset-env": "^1.6.0",
     "normalize.css": "^7.0.0"
   },
   "devDependencies": {
