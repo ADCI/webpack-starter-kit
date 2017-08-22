@@ -27,7 +27,7 @@ Build set-up based on webpack and npm scripts for common needs.
 - change styles file include in src/app.js
 
 #### Scripts: 
-- Javascript: ES2015, ES2016
+- Javascript: ES2015+ (Babel env config)
 - Sourcemaps
 
 #### Code style checking:
@@ -54,6 +54,7 @@ Build set-up based on webpack and npm scripts for common needs.
 - base/:
   - elements: base html elements styles
 - objects/: OOCSS
+- layout/: layouts
 - components/: BEM, Atomic Design
 - settings/: project setup (variables, etc)
 - utilities/: mixins
@@ -121,6 +122,7 @@ new BrowserSyncPlugin({
 
 - \> 0.5%
 - last 2 versions
+- IE11+
 
 ## Related links
 
