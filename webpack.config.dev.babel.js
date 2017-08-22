@@ -54,6 +54,13 @@ module.exports = env => {
           include: path.resolve(__dirname, 'src/js'),
           use: [
             {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true,
+                plugins: ['transform-runtime']
+              }
+            },
+            {
               loader: 'eslint-loader',
               options: {
                 cache: true,
