@@ -15,7 +15,7 @@
     "type": "git",
     "url": "https://github.com/ADCI/webpack-starter-kit"
   },
-  "main": "webpack.config.babel.js",
+  "main": "webpack.config.prod.babel.js",
   "engines": {
     "node": ">=6.9.0"
   },
