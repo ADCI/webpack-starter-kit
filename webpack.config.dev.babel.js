@@ -83,8 +83,8 @@ module.exports = env => {
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: 'inline',
-                  plugins: (loader) => postcssProcessors,
+                  sourceMap: true,
+                  plugins: postcssProcessors,
                 }
               }
             ],
@@ -104,8 +104,8 @@ module.exports = env => {
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: 'inline',
-                  plugins: (loader) => scssProcessors
+                  sourceMap: true,
+                  plugins: scssProcessors
                 }
               },
               {
