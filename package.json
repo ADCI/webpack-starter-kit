@@ -31,7 +31,7 @@
     "prebuild": "npm-run-all --parallel clean sprites",
     "prebuild:prod": "npm-run-all --parallel clean sprites",
     "build": "cross-env STYLES=scss webpack --progress --env.build --config webpack.config.dev.babel.js",
-    "build:prod": "cross-env STYLES=scss webpack -p --env.prod --config webpack.config.prod.babel.js",
+    "build:prod": "cross-env STYLES=scss webpack --env.prod --config webpack.config.prod.babel.js",
     "debug": "cross-env STYLES=scss webpack -d --display-error-details --env.dev",
     "lint:autofix": "stylelint src/scss/**/*.scss --fix && eslint src/js --fix",
     "postinstall": "del-cli node_modules/**/*.info"
