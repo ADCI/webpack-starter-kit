@@ -22,7 +22,7 @@ const scssProcessors = [
   postcssReporter({ clearReportedMessages: true }),
 ];
 
-module.exports = env => {
+module.exports = (env) => {
   const stylesType = process.env.STYLES; // postcss or scss
   const stylesExtension = stylesType === 'scss' ? '.scss' : '.css';
 
@@ -30,12 +30,12 @@ module.exports = env => {
     context: path.resolve(__dirname, 'src'),
 
     entry: {
-      main: './app.js'
+      main: './app.js',
     },
 
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'js/[name].js'
+      filename: 'js/[name].js',
     },
 
     watch: env.dev,
@@ -44,7 +44,7 @@ module.exports = env => {
 
     devServer: {
       contentBase: path.join(__dirname, "dist"),
-      watchContentBase: true
+      watchContentBase: true,
     },
 
     module: {
@@ -57,18 +57,18 @@ module.exports = env => {
               loader: 'babel-loader',
               options: {
                 cacheDirectory: true,
-                plugins: ['transform-runtime']
-              }
+                plugins: ['transform-runtime'],
+              },
             },
             {
               loader: 'eslint-loader',
               options: {
                 cache: true,
                 emitWarning: true,
-                configFile: '.eslintrc'
-              }
-            }
-          ]
+                configFile: '.eslintrc',
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,
@@ -78,18 +78,18 @@ module.exports = env => {
                 loader: 'css-loader',
                 options: {
                   sourceMap: true,
-                }
+                },
               },
               {
                 loader: 'postcss-loader',
                 options: {
                   sourceMap: true,
                   plugins: postcssProcessors,
-                }
-              }
+                },
+              },
             ],
-            publicPath: '../'
-          })
+            publicPath: '../',
+          }),
         },
         {
           test: /\.scss$/,
@@ -98,25 +98,25 @@ module.exports = env => {
               {
                 loader: "css-loader",
                 options: {
-                  sourceMap: true
-                }
+                  sourceMap: true,
+                },
               },
               {
                 loader: 'postcss-loader',
                 options: {
                   sourceMap: true,
-                  plugins: scssProcessors
-                }
+                  plugins: scssProcessors,
+                },
               },
               {
                 loader: "sass-loader",
                 options: {
-                  sourceMap: true
-                }
-              }
+                  sourceMap: true,
+                },
+              },
             ],
-            publicPath: '../'
-          })
+            publicPath: '../',
+          }),
         },
         {
           test: /\.pug$/,
@@ -125,10 +125,10 @@ module.exports = env => {
             {
               loader: 'pug-html-loader',
               options: {
-                exports: false
-              }
-            }
-          ]
+                exports: false,
+              },
+            },
+          ],
         },
         {
           test: /.*\.(gif|png|jpe?g|svg)$/i,
@@ -136,10 +136,10 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                name: 'assets/[name].[ext]'
-              }
+                name: 'assets/[name].[ext]',
+              },
             },
-          ]
+          ],
         },
         {
           test: /\.(woff2?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -147,25 +147,25 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                name: 'assets/[name].[ext]'
-              }
-            }
-          ]
+                name: 'assets/[name].[ext]',
+              },
+            },
+          ],
         },
-      ]
+      ],
     },
 
     plugins: [
       new webpack.DefinePlugin({
-        LANG: JSON.stringify("en")
+        LANG: JSON.stringify("en"),
       }),
 
       new webpack.optimize.CommonsChunkPlugin({
-        name: "common"
+        name: "common",
       }),
 
       new HtmlWebpackPlugin({
-        template: 'pug/index.pug'
+        template: 'pug/index.pug',
       }),
 
       extractStyles,
@@ -186,8 +186,8 @@ module.exports = env => {
         reloadDelay: 50,
         injectChanges: false,
         reloadDebounce: 500,
-        reloadOnRestart: true
+        reloadOnRestart: true,
       }),
     ],
-  }
+  };
 };

@@ -8,13 +8,14 @@ import postcssImport from 'postcss-import';
 import postcssExtend from 'postcss-extend';
 import postcssReporter from 'postcss-reporter';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
+import MinifyPlugin from 'babel-minify-webpack-plugin';
 
 const extractStyles = new ExtractTextPlugin({ filename: 'css/[name].css' });
 
 const supportedBrowsers = [
   '> 0.5%',
   'last 2 versions',
-  'not ie <= 10'
+  'not ie <= 10',
 ];
 
 const postcssProcessors = [
@@ -27,12 +28,12 @@ const postcssProcessors = [
 const scssProcessors = [
   autoprefixer({
     browsers: supportedBrowsers,
-    cascade: false
+    cascade: false,
   }),
   postcssReporter({ clearReportedMessages: true }),
 ];
 
-module.exports = env => {
+module.exports = () => {
   const stylesType = process.env.STYLES; // postcss or scss
   const stylesExtension = stylesType === 'scss' ? '.scss' : '.css';
 
@@ -40,12 +41,12 @@ module.exports = env => {
     context: path.resolve(__dirname, 'src'),
 
     entry: {
-      main: './app.js'
+      main: './app.js',
     },
 
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'js/[name].js'
+      filename: 'js/[name].js',
     },
 
     watch: false,
@@ -62,18 +63,18 @@ module.exports = env => {
               loader: 'babel-loader',
               options: {
                 cacheDirectory: true,
-                plugins: ['transform-runtime']
-              }
+                plugins: ['transform-runtime'],
+              },
             },
             {
               loader: 'eslint-loader',
               options: {
                 cache: true,
                 emitWarning: true,
-                configFile: '.eslintrc'
-              }
-            }
-          ]
+                configFile: '.eslintrc',
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,
@@ -82,19 +83,18 @@ module.exports = env => {
               {
                 loader: 'css-loader',
                 options: {
-                  sourceMap: true,
-                }
+                  minimize: true,
+                },
               },
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: 'inline',
                   plugins: (loader) => postcssProcessors,
-                }
-              }
+                },
+              },
             ],
-            publicPath: '../'
-          })
+            publicPath: '../',
+          }),
         },
         {
           test: /\.scss$/,
@@ -103,37 +103,38 @@ module.exports = env => {
               {
                 loader: "css-loader",
                 options: {
-                  sourceMap: true
-                }
+                  minimize: true,
+                },
               },
               {
                 loader: 'postcss-loader',
                 options: {
-                  sourceMap: 'inline',
-                  plugins: (loader) => scssProcessors
-                }
+                  plugins: (loader) => scssProcessors,
+                },
               },
               {
                 loader: "sass-loader",
-                options: {
-                  sourceMap: true
-                }
-              }
+              },
             ],
-            publicPath: '../'
-          })
+            publicPath: '../',
+          }),
         },
         {
           test: /\.pug$/,
           use: [
-            'html-loader',
+            {
+              loader: 'html-loader',
+              options: {
+                minimize: true,
+              },
+            },
             {
               loader: 'pug-html-loader',
               options: {
-                exports: false
-              }
-            }
-          ]
+                exports: false,
+              },
+            },
+          ],
         },
         {
           test: /.*\.(gif|png|jpe?g|svg)$/i,
@@ -141,26 +142,26 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                name: 'assets/[name].[ext]'
-              }
+                name: 'assets/[name].[ext]',
+              },
             },
             {
               loader: 'image-webpack-loader',
               options: {
-                progressive: true,
                 pngquant: {
-                  quality: '75-90',
-                  speed: 4
+                  quality: '85-90',
+                  speed: 4,
                 },
                 mozjpeg: {
-                  quality: 75
+                  quality: 85,
+                  progressive: true,
                 },
                 gifsicle: {
-                  interlaced: true
-                }
-              }
-            }
-          ]
+                  interlaced: true,
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.(woff2?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -168,25 +169,26 @@ module.exports = env => {
             {
               loader: 'file-loader',
               options: {
-                name: 'assets/[name].[ext]'
-              }
-            }
-          ]
+                name: 'assets/[name].[ext]',
+              },
+            },
+          ],
         },
       ]
     },
 
     plugins: [
       new webpack.DefinePlugin({
-        LANG: JSON.stringify("en")
+        LANG: JSON.stringify("en"),
+        "process.env": { NODE_ENV: "'production'" },
       }),
 
       new webpack.optimize.CommonsChunkPlugin({
-        name: "common"
+        name: "common",
       }),
 
       new HtmlWebpackPlugin({
-        template: 'pug/index.pug'
+        template: 'pug/index.pug',
       }),
 
       extractStyles,
@@ -198,6 +200,8 @@ module.exports = env => {
         failOnError: false,
         quiet: true,
       }),
+
+      new MinifyPlugin,
     ],
   }
 };
